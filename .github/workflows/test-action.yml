@@ -14,14 +14,12 @@ jobs:
         with:  
           who-to-greet: '@wulfland'
       
-      - name: Ooutput the answer 
+      - name: Output the answer 
         run: echo "The answer is ${{ steps.my-action.outputs.answer }}"
 
       - name: Test the container action
-        run: |
-          if [ "${{ steps.my-action.outputs.answer }}" != "42" ]; then
-            echo "Test failed: Expected '42', but got '${{ steps.my-action.outputs.answer }}'"
+        if: ${{ steps.my-action.outputs.answer }}" != "42"
+        run: | 
+            echo "::error file=entrypoint.sh, line=4, title=Error in container. Answer not expected"
             exit 1
-          else
-            echo "Test passed!"
-          fi  
+          
