@@ -18,7 +18,8 @@ jobs:
         run: echo "The answer is ${{ steps.my-action.outputs.answer }}"
 
       - name: Test the container action
-        if: ${{ steps.my-action.outputs.answer }} != 42
+        if: ${{ steps.my-action.outputs.answer != 42 }}
+
         run: | 
             echo "::error file=entrypoint.sh, line=4, title=Error in container. Answer ${{ steps.my-action.outputs.answer }} not expected"
             exit 1
