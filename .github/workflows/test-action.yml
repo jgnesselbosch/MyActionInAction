@@ -19,8 +19,8 @@ jobs:
 
       - name: Test the container action
         run: |
-          if [ "${{ steps.my-action.outputs.answer }}" != "Hello @wulfland!" ]; then
-            echo "Test failed: Expected 'Hello @wulfland!', but got '${{ steps.my-action.outputs.answer }}'"
+          if [ "${{ steps.my-action.outputs.answer }}" != 42 ]; then
+            echo "Test failed: Expected '42', but got '${{ steps.my-action.outputs.answer }}'"
             exit 1
           else
             echo "Test passed!"
