@@ -1,0 +1,27 @@
+name: Test Action
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Run my own container action
+        id: my-action
+        uses: ./
+        with:  
+          who-to-greet: '@wulfland'
+      
+      - name: Ooutput the answer 
+        run: echo "The answer is ${{ steps.my-action.outputs.answer }}"
+
+      - name: Test the container action
+        run: |
+          if [ "${{ steps.my-action.outputs.answer }}" != "Hello @wulfland!" ]; then
+            echo "Test failed: Expected 'Hello @wulfland!', but got '${{ steps.my-action.outputs.answer }}'"
+            exit 1
+          else
+            echo "Test passed!"
+          fi  
